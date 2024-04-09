@@ -1,3 +1,4 @@
+import { extraireResultatsVote } from 'api_senat.js';
 
 
 // Fonction pour afficher les résultats de vote "Pour" et "Contre"
