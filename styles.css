@@ -11,16 +11,15 @@ body {
     max-width: 600px;
 }
 
-#voteSubject {
-    margin-bottom: 20px;
-    padding: 10px;
-    border: 1px solid #ddd;
-    background-color: #f9f9f9;
+.vote-controls {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Espacement entre les boutons */
+    margin-bottom: 20px; /* Espacement entre les boutons et les résultats */
 }
 
 .voteBtn {
     padding: 10px 20px;
-    margin: 0 10px;
     border: none;
     background-color: #007bff;
     color: white;
@@ -29,4 +28,22 @@ body {
 
 .voteBtn:active {
     transform: scale(0.98);
+}
+
+.resultats {
+    margin-top: 10px;
+    text-align: left;
+}
+
+.resultats h3 {
+    margin: 10px 0;
+}
+
+/* Style spécifique pour chaque type de vote */
+#senateursPour {
+    color: green;
+}
+
+#senateursContre {
+    color: red;
 }

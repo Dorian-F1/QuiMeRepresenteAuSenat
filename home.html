@@ -9,18 +9,13 @@
 <body>
     <div id="voteContainer">
         <div id="voteSubject"></div>
-        <div id="voteControls">
-            <!-- Bouton et liste des sénateurs ayant voté "Contre" -->
-            <div class="voteSection">
-                <button id="voteAgainst" class="voteBtn">Contre</button>
-                <div id="senateursContre" class="senateursList"></div>
-            </div>
-
-            <!-- Bouton et liste des sénateurs ayant voté "Pour" -->
-            <div class="voteSection">
-                <button id="voteFor" class="voteBtn">Pour</button>
-                <div id="senateursPour" class="senateursList"></div>
-            </div>
+        <div id="voteControls" class="vote-controls">
+            <button id="voteFor" class="voteBtn">Pour</button>
+            <button id="voteAgainst" class="voteBtn">Contre</button>
+        </div>
+        <div id="resultatsVote">
+            <div id="senateursPour" class="resultats"></div>
+            <div id="senateursContre" class="resultats"></div>
         </div>
     </div>
     <script src="script.js"></script>
