@@ -1,3 +1,28 @@
+
+
+// Fonction pour afficher les résultats de vote "Pour" et "Contre"
+async function afficherResultatsVote() {
+    const url = "https://www.senat.fr/scrutin-public/2023/scr2023-109.html";
+    const resultatsVote = await extraireResultatsVote(url);
+
+    if (resultatsVote) {
+        const divPour = document.getElementById('senateursPour');
+        const divContre = document.getElementById('senateursContre');
+
+        // Afficher les sénateurs qui ont voté "Pour"
+        if (resultatsVote['Pour']) {
+            divPour.innerHTML = '<h3>Ont voté pour :</h3>' + resultatsVote['Pour'].map(senateur => `<p>${senateur.name}</p>`).join('');
+        }
+
+        // Afficher les sénateurs qui ont voté "Contre"
+        if (resultatsVote['Contre']) {
+            divContre.innerHTML = '<h3>Ont voté contre :</h3>' + resultatsVote['Contre'].map(senateur => `<p>${senateur.name}</p>`).join('');
+        }
+    } else {
+        console.error("Impossible d'afficher les résultats du vote.");
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     // Initialise avec la date d'aujourd'hui
     let currentDate = new Date();
@@ -67,27 +92,4 @@ function getVotes(date) {
         date: date,
         subject: "Sujet du vote"
     };
-}
-
-// Fonction pour afficher les résultats de vote "Pour" et "Contre"
-async function afficherResultatsVote() {
-    const url = "https://www.senat.fr/scrutin-public/2023/scr2023-109.html";
-    const resultatsVote = await extraireResultatsVote(url);
-
-    if (resultatsVote) {
-        const divPour = document.getElementById('senateursPour');
-        const divContre = document.getElementById('senateursContre');
-
-        // Afficher les sénateurs qui ont voté "Pour"
-        if (resultatsVote['Pour']) {
-            divPour.innerHTML = '<h3>Ont voté pour :</h3>' + resultatsVote['Pour'].map(senateur => `<p>${senateur.name}</p>`).join('');
-        }
-
-        // Afficher les sénateurs qui ont voté "Contre"
-        if (resultatsVote['Contre']) {
-            divContre.innerHTML = '<h3>Ont voté contre :</h3>' + resultatsVote['Contre'].map(senateur => `<p>${senateur.name}</p>`).join('');
-        }
-    } else {
-        console.error("Impossible d'afficher les résultats du vote.");
-    }
 }
