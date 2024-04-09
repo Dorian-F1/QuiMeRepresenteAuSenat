@@ -1,32 +1,32 @@
 // script.js
 
-// Supposons que `resultatsVote` est l'objet retourné par `extraireResultatsVote`
-extraireResultatsVote(url).then(resultatsVote => {
-    // Vérifiez que les données sont retournées correctement
+// Supposons que extraireResultatsVote retourne un objet avec les clés "Pour" et "Contre",
+// chacune contenant un tableau des sénateurs qui ont voté de cette manière.
+async function afficherResultatsVote() {
+    const url = "URL_DE_LA_PAGE_DU_SENAT";
+    const resultatsVote = await extraireResultatsVote(url);
+
     if (resultatsVote) {
-        // Affichez les noms des sénateurs qui ont voté "Pour"
-        const divSenateursPour = document.getElementById('senateursPour');
+        const divPour = document.getElementById('senateursPour');
+        const divContre = document.getElementById('senateursContre');
+
+        // Afficher les sénateurs qui ont voté "Pour"
         if (resultatsVote['Pour']) {
-            resultatsVote['Pour'].forEach(senateur => {
-                const p = document.createElement('p');
-                p.textContent = senateur.name;
-                divSenateursPour.appendChild(p);
-            });
+            divPour.innerHTML = '<h3>Ont voté pour :</h3>' + resultatsVote['Pour'].map(senateur => `<p>${senateur.name}</p>`).join('');
         }
 
-        // Affichez les noms des sénateurs qui ont voté "Contre"
-        const divSenateursContre = document.getElementById('senateursContre');
+        // Afficher les sénateurs qui ont voté "Contre"
         if (resultatsVote['Contre']) {
-            resultatsVote['Contre'].forEach(senateur => {
-                const p = document.createElement('p');
-                p.textContent = senateur.name;
-                divSenateursContre.appendChild(p);
-            });
+            divContre.innerHTML = '<h3>Ont voté contre :</h3>' + resultatsVote['Contre'].map(senateur => `<p>${senateur.name}</p>`).join('');
         }
+    } else {
+        console.error("Impossible d'afficher les résultats du vote.");
     }
-}).catch(error => {
-    console.error("Erreur lors de la récupération des résultats de vote :", error);
-});
+}
+
+// Appel de la fonction pour afficher les résultats
+afficherResultatsVote();
+
 
 
 document.addEventListener('DOMContentLoaded', function() {
