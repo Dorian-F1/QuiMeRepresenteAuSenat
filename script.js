@@ -1,38 +1,36 @@
 // script.js
 document.addEventListener('DOMContentLoaded', function() {
-    // Supposons que vous avez une fonction getVotes qui retourne un objet avec le sujet du vote
-    // Pour l'exemple, nous utilisons une date fixe
-    const voteData = getVotes('20240409'); // Utilisez la date actuelle ou une logique pour obtenir la date
+    // Fonction pour demander une date à l'utilisateur et afficher le sujet du vote correspondant
+    function askForDateAndDisplayVote() {
+        let dateInput = prompt("Veuillez entrer une date pour laquelle vous souhaitez connaître le sujet du vote (format YYYYMMDD):");
+        if (dateInput) {
+            const voteData = getVotes(dateInput);
+            if (voteData && voteData.subject) {
+                const voteSubjectElement = document.getElementById('voteSubject');
+                voteSubjectElement.textContent = voteData.subject;
+            } else {
+                alert("Aucun vote trouvé pour cette date. Veuillez essayer une autre date.");
+                askForDateAndDisplayVote();
+            }
+        }
+    }
 
-    // Affichage du sujet du vote
-    const voteSubjectElement = document.getElementById('voteSubject');
-    voteSubjectElement.textContent = voteData.subject;
+    // Appel initial pour demander la date et afficher le sujet du vote
+    askForDateAndDisplayVote();
 
-    // Gestion des swipes et des clics sur les boutons
+    // Gestion des clics sur les boutons de vote
     const voteAgainstButton = document.getElementById('voteAgainst');
     const voteForButton = document.getElementById('voteFor');
 
-    voteAgainstButton.addEventListener('click', function() {
-        submitVote('against');
-    });
+    function handleVote() {
+        submitVote(this.id === 'voteAgainst' ? 'against' : 'for');
+        askForDateAndDisplayVote(); // Demander une nouvelle date après un vote
+    }
 
-    voteForButton.addEventListener('click', function() {
-        submitVote('for');
-    });
+    voteAgainstButton.addEventListener('click', handleVote);
+    voteForButton.addEventListener('click', handleVote);
 
-    // Gestion des swipes (nécessite une librairie de détection de swipe ou du code supplémentaire)
-    // Exemple avec pseudo-code
-    /*
-    swipeDetector.on('swipeleft', function() {
-        submitVote('against');
-    });
-
-    swipeDetector.on('swiperight', function() {
-        submitVote('for');
-    });
-    */
-
-    // Fonction pour soumettre le vote
+    // Fonction pour soumettre le vote (simulée pour l'exemple)
     function submitVote(vote) {
         console.log('Vote submitted:', vote);
         // Ici, vous pouvez ajouter la logique pour enregistrer le vote via une API ou un service externe
@@ -42,7 +40,8 @@ document.addEventListener('DOMContentLoaded', function() {
 // Fonction getVotes (simulée pour l'exemple)
 function getVotes(date) {
     // Cette fonction devrait interagir avec une API ou une base de données pour récupérer les données
-    // Pour l'exemple, nous retournons un objet statique
+    // Pour l'exemple, nous retournons un objet statique basé sur la date saisie
+    // Simulez ici la récupération du sujet du vote pour la date donnée
     return {
         date: date,
         subject: "Sujet du vote du " + date
