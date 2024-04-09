@@ -1,4 +1,34 @@
 // script.js
+
+// Supposons que `resultatsVote` est l'objet retourné par `extraireResultatsVote`
+extraireResultatsVote(url).then(resultatsVote => {
+    // Vérifiez que les données sont retournées correctement
+    if (resultatsVote) {
+        // Affichez les noms des sénateurs qui ont voté "Pour"
+        const divSenateursPour = document.getElementById('senateursPour');
+        if (resultatsVote['Pour']) {
+            resultatsVote['Pour'].forEach(senateur => {
+                const p = document.createElement('p');
+                p.textContent = senateur.name;
+                divSenateursPour.appendChild(p);
+            });
+        }
+
+        // Affichez les noms des sénateurs qui ont voté "Contre"
+        const divSenateursContre = document.getElementById('senateursContre');
+        if (resultatsVote['Contre']) {
+            resultatsVote['Contre'].forEach(senateur => {
+                const p = document.createElement('p');
+                p.textContent = senateur.name;
+                divSenateursContre.appendChild(p);
+            });
+        }
+    }
+}).catch(error => {
+    console.error("Erreur lors de la récupération des résultats de vote :", error);
+});
+
+
 document.addEventListener('DOMContentLoaded', function() {
     // Initialise avec la date d'aujourd'hui
     let currentDate = new Date();
@@ -20,6 +50,8 @@ document.addEventListener('DOMContentLoaded', function() {
     voteAgainstButton.addEventListener('click', handleVote);
     voteForButton.addEventListener('click', handleVote);
 });
+
+
 
 // Fonction pour afficher le sujet du vote pour une date donnée
 function displayVoteForDate(date) {
