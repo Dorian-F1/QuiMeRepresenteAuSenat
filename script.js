@@ -1,5 +1,25 @@
 import { extraireResultatsVote } from 'api_senat.js';
 
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialise avec la date d'aujourd'hui
+    let currentDate = new Date();
+
+    // Affiche le sujet du vote pour la date actuelle et les résultats du vote
+    displayVoteForDate(currentDate);
+    //afficherResultatsVote(); // Cette fonction affiche les résultats du vote "Pour" et "Contre"
+
+    // Gestion des clics sur les boutons de vote
+    const voteAgainstButton = document.getElementById('voteAgainst');
+    const voteForButton = document.getElementById('voteFor');
+
+    voteAgainstButton.addEventListener('click', function() {
+        handleVote('contre');
+    });
+    voteForButton.addEventListener('click', function() {
+        handleVote('pour');
+    });
+});
+
 
 // Fonction pour afficher les résultats de vote "Pour" et "Contre"
 async function afficherResultatsVote() {
@@ -23,26 +43,6 @@ async function afficherResultatsVote() {
         console.error("Impossible d'afficher les résultats du vote.");
     }
 }
-
-document.addEventListener('DOMContentLoaded', function() {
-    // Initialise avec la date d'aujourd'hui
-    let currentDate = new Date();
-
-    // Affiche le sujet du vote pour la date actuelle et les résultats du vote
-    displayVoteForDate(currentDate);
-    //afficherResultatsVote(); // Cette fonction affiche les résultats du vote "Pour" et "Contre"
-
-    // Gestion des clics sur les boutons de vote
-    const voteAgainstButton = document.getElementById('voteAgainst');
-    const voteForButton = document.getElementById('voteFor');
-
-    voteAgainstButton.addEventListener('click', function() {
-        handleVote('contre');
-    });
-    voteForButton.addEventListener('click', function() {
-        handleVote('pour');
-    });
-});
 
 // Fonction pour gérer le vote et passer au jour précédent
 function handleVote(vote) {
