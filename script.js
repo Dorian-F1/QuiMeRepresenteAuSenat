@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Affiche le sujet du vote pour la date actuelle et les résultats du vote
     displayVoteForDate(currentDate);
-    afficherResultatsVote(); // Cette fonction affiche les résultats du vote "Pour" et "Contre"
+    //afficherResultatsVote(); // Cette fonction affiche les résultats du vote "Pour" et "Contre"
 
     // Gestion des clics sur les boutons de vote
     const voteAgainstButton = document.getElementById('voteAgainst');
@@ -51,7 +51,7 @@ function handleVote(vote) {
     let currentDate = new Date();
     currentDate.setDate(currentDate.getDate() - 1);
     displayVoteForDate(currentDate);
-    afficherResultatsVote(); // Mettre à jour les résultats du vote pour la nouvelle date
+    //afficherResultatsVote(); // Mettre à jour les résultats du vote pour la nouvelle date
 }
 
 // Fonction pour afficher le sujet du vote pour une date donnée
