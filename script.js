@@ -12,7 +12,7 @@ async function afficherResultatsVote() {
 
         // Afficher les sénateurs qui ont voté "Pour"
         if (resultatsVote['Pour']) {
-            divPour.innerHTML = 'Ont voté pour :' + resultatsVote['Pour'].map(senateur => `<p>${senateur.name}</p>`).join('');
+            divPour.innerHTML = 'Ont voté pour :' + resultatsVote['Ont voté pour'].map(senateur => `<p>${senateur.name}</p>`).join('');
         }
 
         // Afficher les sénateurs qui ont voté "Contre"
