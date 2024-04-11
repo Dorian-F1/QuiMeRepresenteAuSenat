@@ -1,5 +1,3 @@
-import { extraireResultatsVote } from 'api_senat.js';
-
 // Fonction pour formater la date en "YYYYMMDD"
 function formatDateToYYYYMMDD(date) {
     const year = date.getFullYear();
