@@ -2,20 +2,6 @@
 const supabase = createClient('https://nuigxviqflxckmqrnuni.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im51aWd4dmlxZmx4Y2ttcXJudW5pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDk5MjIzODQsImV4cCI6MjAyNTQ5ODM4NH0.fsyXZuidgJ7zOz0Sxh1ktZbChWi22-__2ikd2F31XOA')
 
 
-// Fonction asynchrone pour récupérer et afficher les votes
-async function fetchAndDisplayVotes() {
-    let { data: Votes, error } = await supabase
-      .from('Votes')
-      .select('id_scrutin, name, vote')
-  
-    // Vérifier s'il y a une erreur
-    if (error) {
-      console.error('Erreur lors de la récupération des données:', error);
-    } else {
-      console.log('Données récupérées:', Votes);
-    }
-  }
-
 
   // Fonction pour formater la date en "YYYYMMDD"
 function formatDateToYYYYMMDD(date) {
@@ -34,8 +20,6 @@ function formatDate(date) {
 // Fonction pour initialiser la date d'aujourd'hui et la mettre à jour lors du clic sur les boutons
 function initDateAndSetupControls() {
 
-    // Appeler la fonction pour récupérer et afficher les votes
-    fetchAndDisplayVotes();
 
 
 
