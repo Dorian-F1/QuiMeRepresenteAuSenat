@@ -35,6 +35,26 @@ function initDateAndSetupControls() {
     // Ajouter des écouteurs d'événements sur les boutons pour et contre
     document.getElementById('voteFor').addEventListener('click', goToPreviousDay);
     document.getElementById('voteAgainst').addEventListener('click', goToPreviousDay);
+
+    // URL de l'image à ajouter
+    const imageUrl = "https://nuigxviqflxckmqrnuni.supabase.co/storage/v1/object/public/photos/aeschlimann_marie.jpg";
+
+    // Créer un nouvel élément <img>
+    const imageElement = document.createElement('img');
+
+    // Définir l'URL de l'image
+    imageElement.src = imageUrl;
+
+    // Optionnel : Ajouter des styles à l'image, par exemple pour contrôler sa taille
+    imageElement.style.width = '100px'; // Exemple de réglage de la largeur de l'image
+    imageElement.style.height = 'auto'; // Conserver le ratio d'aspect
+
+    // Trouver le bouton "Pour" par son id
+    const boutonPour = document.getElementById('voteFor');
+
+    // Insérer l'image dans le DOM juste après le bouton "Pour"
+    boutonPour.insertAdjacentElement('afterend', imageElement);
+
 }
 
 // Appeler la fonction initDateAndSetupControls lorsque la page est chargée
