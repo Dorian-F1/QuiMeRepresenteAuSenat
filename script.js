@@ -1,4 +1,25 @@
-// Fonction pour formater la date en "YYYYMMDD"
+import { createClient } from '@supabase/supabase-js'
+
+// Créer un client Supabase unique pour interagir avec votre base de données
+const supabase = createClient('https://nuigxviqflxckmqrnuni.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im51aWd4dmlxZmx4Y2ttcXJudW5pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDk5MjIzODQsImV4cCI6MjAyNTQ5ODM4NH0.fsyXZuidgJ7zOz0Sxh1ktZbChWi22-__2ikd2F31XOA')
+
+
+// Fonction asynchrone pour récupérer et afficher les votes
+async function fetchAndDisplayVotes() {
+    let { data: Votes, error } = await supabase
+      .from('Votes')
+      .select('id_scrutin, name, vote')
+  
+    // Vérifier s'il y a une erreur
+    if (error) {
+      console.error('Erreur lors de la récupération des données:', error);
+    } else {
+      console.log('Données récupérées:', Votes);
+    }
+  }
+
+
+  // Fonction pour formater la date en "YYYYMMDD"
 function formatDateToYYYYMMDD(date) {
     const year = date.getFullYear();
     const month = (date.getMonth() + 1).toString().padStart(2, '0');
@@ -14,6 +35,12 @@ function formatDate(date) {
 
 // Fonction pour initialiser la date d'aujourd'hui et la mettre à jour lors du clic sur les boutons
 function initDateAndSetupControls() {
+
+    // Appeler la fonction pour récupérer et afficher les votes
+    fetchAndDisplayVotes();
+
+
+
     let currentDate = new Date();
 
     // Fonction pour mettre à jour l'affichage de la date
@@ -35,25 +62,6 @@ function initDateAndSetupControls() {
     // Ajouter des écouteurs d'événements sur les boutons pour et contre
     document.getElementById('voteFor').addEventListener('click', goToPreviousDay);
     document.getElementById('voteAgainst').addEventListener('click', goToPreviousDay);
-
-    // URL de l'image à ajouter
-    const imageUrl = "https://nuigxviqflxckmqrnuni.supabase.co/storage/v1/object/public/photos/aeschlimann_marie.jpg";
-
-    // Créer un nouvel élément <img>
-    const imageElement = document.createElement('img');
-
-    // Définir l'URL de l'image
-    imageElement.src = imageUrl;
-
-    // Optionnel : Ajouter des styles à l'image, par exemple pour contrôler sa taille
-    imageElement.style.width = '100px'; // Exemple de réglage de la largeur de l'image
-    imageElement.style.height = 'auto'; // Conserver le ratio d'aspect
-
-    // Trouver le bouton "Pour" par son id
-    const boutonPour = document.getElementById('voteFor');
-
-    // Insérer l'image dans le DOM juste après le bouton "Pour"
-    boutonPour.insertAdjacentElement('afterend', imageElement);
 
 }
 
