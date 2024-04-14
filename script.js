@@ -1,3 +1,4 @@
+import {createClient} from '@supabase/supabase-js'
 
 // Fonction pour formater la date en "YYYYMMDD"
 function formatDateToYYYYMMDD(date) {
@@ -41,7 +42,25 @@ function initDateAndSetupControls() {
     document.getElementById('voteFor').addEventListener('click', goToPreviousDay);
     document.getElementById('voteAgainst').addEventListener('click', goToPreviousDay);
 
+    // Récupération des données de Supabase
+    try {
+        let { data: Votes, error } = await supabase
+            .from('Votes')
+            .select('id_scrutin');
+
+        if (error) throw error;
+
+        // Afficher les données dans la console
+        console.log(Votes);
+    } catch (error) {
+        console.error('Erreur lors de la récupération des données:', error.message);
+    }
+
 }
+
+const supabaseUrl = 'https://nuigxviqflxckmqrnuni.supabase.co'
+const supabaseKey = process.env.SUPABASE_KEY
+const supabase = createClient(supabaseUrl, supabaseKey)
 
 // Appeler la fonction initDateAndSetupControls lorsque la page est chargée
 document.addEventListener('DOMContentLoaded', initDateAndSetupControls);
